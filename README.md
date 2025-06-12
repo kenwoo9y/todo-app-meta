@@ -13,7 +13,7 @@ A meta repository for learning different technology stacks through a simple Todo
 - [todo-api-fastapi](https://github.com/kenwoo9y/todo-api-fastapi): Backend API built with FastAPI
 - [todo-api-rails](https://github.com/kenwoo9y/todo-api-rails): Backend API built with Ruby on Rails
 - [todo-api-springboot](https://github.com/kenwoo9y/todo-api-springboot): Backend API built with Spring Boot
-- todo-api-go: Backend API built with Go
+- [todo-api-go](https://github.com/kenwoo9y/todo-api-go): Backend API built with Go
 
 ### Infrastructure
 - todo-infra-aws: Infrastructure built with Terraform on AWS

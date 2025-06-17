@@ -1,0 +1,30 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+!define foreign_key(x) #x#
+
+entity "users" as users {
+  *id : bigint <<PK>>
+  --
+  username : varchar(30) <<unique>>
+  email : varchar(80) <<unique>>
+  first_name : varchar(40)
+  last_name : varchar(40)
+  *created_at : datetime
+  *updated_at : datetime
+}
+
+entity "tasks" as tasks {
+  *id : bigint <<PK>>
+  --
+  title : varchar(30)
+  description : varchar(255)
+  due_date : date
+  status : varchar(10)
+  owner_id : bigint <<FK>>
+  *created_at : datetime
+  *updated_at : datetime
+}
+
+users ||--o{ tasks : "has"
+@enduml 

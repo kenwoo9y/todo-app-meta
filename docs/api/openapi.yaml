@@ -1,0 +1,210 @@
+openapi: 3.0.3
+info:
+  title: ToDo API
+  version: v1
+  description: Simple Todo management API
+servers:
+  - url: https://api.example.com/v1
+    description: example server
+paths:
+  /tasks:
+    get:
+      summary: Get All Tasks
+      description: Get All Tasks
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: Create Task
+      description: Create Task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+  /tasks/{id}:
+    get:
+      summary: Get Task By Id
+      description: Get Task By Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+    patch:
+      summary: Update Task
+      description: Update Task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+    delete:
+      summary: Delete Task
+      description: Delete Task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 0
+        title:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        due_date:
+          type: string
+          format: date
+          example: 2025-06-17
+        status:
+          type: string
+          example: ToDo
+        owner_id:
+          type: integer
+          example: 0
+        created_at:
+          type: string
+          format: date-time
+          example: 2025-06-17T15:21:35.841Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2025-06-17T15:21:35.841Z
+    TaskCreate:
+      type: object
+      required:
+        - title
+        - description
+        - due_date
+        - status
+        - owner_id
+      properties:
+        title:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        due_date:
+          type: string
+          format: date
+          example: 2025-06-17
+        status:
+          type: string
+          example: ToDo
+        owner_id:
+          type: integer
+          example: 0
+    TaskUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        due_date:
+          type: string
+          format: date
+          example: 2025-06-17
+        status:
+          type: string
+          example: ToDo
+        owner_id:
+          type: integer
+          example: 0
+    ValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  oneOf:
+                    - type: string
+                    - type: integer
+                example: ["string", 0]
+              msg:
+                type: string
+                example: string
+              type:
+                type: string
+                example: string

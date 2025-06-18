@@ -1,0 +1,144 @@
+@startuml
+!define class(x) class x
+!define interface(x) interface x
+
+' Backend Domain Models
+class User {
+  +id: bigint
+  +username: string
+  +email: string
+  +first_name: string
+  +last_name: string
+  +created_at: datetime
+  +updated_at: datetime
+  --
+  +validate(): boolean
+  +getFullName(): string
+}
+
+class Task {
+  +id: bigint
+  +title: string
+  +description: string
+  +due_date: date
+  +status: Status
+  +owner_id: bigint
+  +created_at: datetime
+  +updated_at: datetime
+  --
+  +validate(): boolean
+  +isOverdue(): boolean
+  +updateStatus(status: Status): void
+}
+
+enum Status {
+  ToDo
+  Doing
+  Done
+}
+
+' Backend Controllers
+class UserController {
+  +getAllUsers(): User[]
+  +getUserById(id: bigint): User
+  +getUserByUsername(username: string): User
+  +createUser(userData: UserCreate): User
+  +updateUser(id: bigint, userData: UserUpdate): User
+  +deleteUser(id: bigint): void
+  +getUserTasks(ownerId: bigint): Task[]
+}
+
+class TaskController {
+  +getAllTasks(): Task[]
+  +getTaskById(id: bigint): Task
+  +createTask(taskData: TaskCreate): Task
+  +updateTask(id: bigint, taskData: TaskUpdate): Task
+  +deleteTask(id: bigint): void
+}
+
+' Backend Services
+class UserService {
+  +findAll(): User[]
+  +findById(id: bigint): User
+  +findByUsername(username: string): User
+  +create(userData: UserCreate): User
+  +update(id: bigint, userData: UserUpdate): User
+  +delete(id: bigint): void
+  +getUserTasks(ownerId: bigint): Task[]
+}
+
+class TaskService {
+  +findAll(): Task[]
+  +findById(id: bigint): Task
+  +findByOwnerId(ownerId: bigint): Task[]
+  +create(taskData: TaskCreate): Task
+  +update(id: bigint, taskData: TaskUpdate): Task
+  +delete(id: bigint): void
+}
+
+' Backend Repositories
+interface UserRepository {
+  +findAll(): User[]
+  +findById(id: bigint): User
+  +findByUsername(username: string): User
+  +save(user: User): User
+  +update(user: User): User
+  +delete(id: bigint): void
+}
+
+interface TaskRepository {
+  +findAll(): Task[]
+  +findById(id: bigint): Task
+  +findByOwnerId(ownerId: bigint): Task[]
+  +save(task: Task): Task
+  +update(task: Task): Task
+  +delete(id: bigint): void
+}
+
+' DTOs
+class UserCreate {
+  +username: string
+  +email: string
+  +first_name: string
+  +last_name: string
+}
+
+class UserUpdate {
+  +username: string
+  +email: string
+  +first_name: string
+  +last_name: string
+}
+
+class TaskCreate {
+  +title: string
+  +description: string
+  +due_date: date
+  +status: Status
+  +owner_id: bigint
+}
+
+class TaskUpdate {
+  +title: string
+  +description: string
+  +due_date: date
+  +status: Status
+  +owner_id: bigint
+}
+
+' Relationships
+User ||--o{ Task : "owns"
+UserController --> UserService : "uses"
+TaskController --> TaskService : "uses"
+UserService --> UserRepository : "uses"
+TaskService --> TaskRepository : "uses"
+TaskService --> UserService : "uses"
+
+UserController --> UserCreate : "accepts"
+UserController --> UserUpdate : "accepts"
+TaskController --> TaskCreate : "accepts"
+TaskController --> TaskUpdate : "accepts"
+
+Task --> Status : "has"
+
+@enduml 

@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: ToDo API
   version: v1
-  description: Simple Todo management API
+  description: Simple Todo API
 servers:
   - url: https://api.example.com/v1
     description: example server
@@ -294,11 +294,11 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2025-06-18T14:43:09.115Z
+          example: 2006-01-02T15:04:05.000Z
         updated_at:
           type: string
           format: date-time
-          example: 2025-06-18T14:43:09.115Z
+          example: 2006-01-02T15:04:05.000Z
     UserCreate:
       type: object
       required:
@@ -351,7 +351,7 @@ components:
         due_date:
           type: string
           format: date
-          example: 2025-06-18
+          example: 2006-01-02
         status:
           $ref: '#/components/schemas/Status'
         owner_id:
@@ -360,11 +360,11 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2025-06-18T15:04:28.977Z
+          example: 2006-01-02T15:04:05.000Z
         updated_at:
           type: string
           format: date-time
-          example: 2025-06-18T15:04:28.977Z
+          example: 2006-01-02T15:04:05.000Z
     TaskCreate:
       type: object
       required:
@@ -383,7 +383,7 @@ components:
         due_date:
           type: string
           format: date
-          example: 2025-06-18
+          example: 2006-01-02
         status:
           $ref: '#/components/schemas/Status'
         owner_id:
@@ -401,7 +401,7 @@ components:
         due_date:
           type: string
           format: date
-          example: 2025-06-18
+          example: 2006-01-02
         status:
           $ref: '#/components/schemas/Status'
         owner_id:

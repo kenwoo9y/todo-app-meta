@@ -111,6 +111,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationError'
+  /users/username/{username}:
+    get:
+      summary: Get User By Username
+      description: Get User By Username
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
   /tasks:
     get:
       summary: Get All Tasks
@@ -239,11 +262,11 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2025-06-18T14:36:23.881Z
+          example: 2025-06-18T14:43:09.115Z
         updated_at:
           type: string
           format: date-time
-          example: 2025-06-18T14:36:23.881Z
+          example: 2025-06-18T14:43:09.115Z
     UserCreate:
       type: object
       required:

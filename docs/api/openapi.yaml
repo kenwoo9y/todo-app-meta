@@ -7,6 +7,110 @@ servers:
   - url: https://api.example.com/v1
     description: example server
 paths:
+  /users:
+    get:
+      summary: Get All Users
+      description: Get All Users
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create User
+      description: Create User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+  /users/{id}:
+    get:
+      summary: Get By Id
+      description: Get By Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+    patch:
+      summary: Update User
+      description: Update User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+    delete:
+      summary: Delete User
+      description: Delete User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
   /tasks:
     get:
       summary: Get All Tasks
@@ -113,6 +217,70 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 0
+        username:
+          type: string
+          example: string
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        first_name:
+          type: string
+          example: string
+        last_name:
+          type: string
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          example: 2025-06-18T14:36:23.881Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2025-06-18T14:36:23.881Z
+    UserCreate:
+      type: object
+      required:
+        - username
+        - email
+        - first_name
+        - last_name
+      properties:
+        username:
+          type: string
+          example: string
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        first_name:
+          type: string
+          example: string
+        last_name:
+          type: string
+          example: string
+    UserUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+          example: string
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        first_name:
+          type: string
+          example: string
+        last_name:
+          type: string
+          example: string
     Task:
       type: object
       properties:
@@ -128,7 +296,7 @@ components:
         due_date:
           type: string
           format: date
-          example: 2025-06-17
+          example: 2025-06-18
         status:
           type: string
           example: ToDo
@@ -138,11 +306,11 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2025-06-17T15:21:35.841Z
+          example: 2025-06-18T14:26:54.807Z
         updated_at:
           type: string
           format: date-time
-          example: 2025-06-17T15:21:35.841Z
+          example: 2025-06-18T14:26:54.807Z
     TaskCreate:
       type: object
       required:
@@ -161,7 +329,7 @@ components:
         due_date:
           type: string
           format: date
-          example: 2025-06-17
+          example: 2025-06-18
         status:
           type: string
           example: ToDo
@@ -180,7 +348,7 @@ components:
         due_date:
           type: string
           format: date
-          example: 2025-06-17
+          example: 2025-06-18
         status:
           type: string
           example: ToDo

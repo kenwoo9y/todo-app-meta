@@ -1,0 +1,30 @@
+@startuml
+!theme plain
+
+left to right direction
+
+actor User as U
+
+rectangle "Todo Application" {
+  usecase "View Task List" as UC1
+  usecase "View Task Details" as UC2
+  usecase "Create Task" as UC3
+  usecase "Update Task" as UC4
+  usecase "Delete Task" as UC5
+}
+
+' User relationships
+U --> UC1
+U --> UC2
+U --> UC3
+U --> UC4
+U --> UC5
+
+' Include relationships
+UC3 ..> UC1 : <<include>>
+UC4 ..> UC1 : <<include>>
+UC4 ..> UC2 : <<include>>
+UC5 ..> UC1 : <<include>>
+UC5 ..> UC2 : <<include>>
+
+@enduml 

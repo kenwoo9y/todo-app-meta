@@ -11,9 +11,6 @@ class User {
   +last_name: string
   +created_at: datetime
   +updated_at: datetime
-  --
-  +validate(): boolean
-  +getFullName(): string
 }
 
 class Task {
@@ -25,10 +22,6 @@ class Task {
   +owner_id: bigint
   +created_at: datetime
   +updated_at: datetime
-  --
-  +validate(): boolean
-  +isOverdue(): boolean
-  +updateStatus(status: Status): void
 }
 
 enum Status {

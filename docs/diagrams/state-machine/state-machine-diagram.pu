@@ -1,0 +1,41 @@
+@startuml
+!theme plain
+
+[*] --> ToDo : Create Task
+
+state ToDo {
+  [*] --> Created
+  Created --> Ready : Initialize
+}
+
+state Doing {
+  [*] --> InProgress
+  InProgress --> Paused : Pause
+  Paused --> InProgress : Resume
+}
+
+state Done {
+  [*] --> Completed
+  Completed --> Archived : Archive
+}
+
+ToDo --> Doing : Start Work
+Doing --> Done : Complete
+Done --> ToDo : Reopen
+
+note right of ToDo
+  Task is created but
+  work has not started
+end note
+
+note right of Doing
+  Task is being worked on
+  or temporarily paused
+end note
+
+note right of Done
+  Task is completed
+  and can be archived
+end note
+
+@enduml 

@@ -265,6 +265,13 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
 components:
   schemas:
+    Status:
+      type: string
+      enum:
+        - ToDo
+        - Doing
+        - Done
+      example: ToDo
     User:
       type: object
       properties:
@@ -346,8 +353,7 @@ components:
           format: date
           example: 2025-06-18
         status:
-          type: string
-          example: ToDo
+          $ref: '#/components/schemas/Status'
         owner_id:
           type: integer
           example: 0
@@ -379,8 +385,7 @@ components:
           format: date
           example: 2025-06-18
         status:
-          type: string
-          example: ToDo
+          $ref: '#/components/schemas/Status'
         owner_id:
           type: integer
           example: 0
@@ -398,8 +403,7 @@ components:
           format: date
           example: 2025-06-18
         status:
-          type: string
-          example: ToDo
+          $ref: '#/components/schemas/Status'
         owner_id:
           type: integer
           example: 0

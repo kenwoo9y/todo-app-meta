@@ -134,6 +134,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationError'
+  /users/{owner_id}/tasks:
+    get:
+      summary: Get All Tasks By Owner
+      description: Get All Tasks By Owner
+      parameters:
+        - name: owner_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
   /tasks:
     get:
       summary: Get All Tasks
@@ -329,11 +354,11 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2025-06-18T14:26:54.807Z
+          example: 2025-06-18T15:04:28.977Z
         updated_at:
           type: string
           format: date-time
-          example: 2025-06-18T14:26:54.807Z
+          example: 2025-06-18T15:04:28.977Z
     TaskCreate:
       type: object
       required:

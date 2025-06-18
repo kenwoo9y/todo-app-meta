@@ -1,0 +1,28 @@
+@startuml
+!theme plain
+
+title Update Task
+
+actor User
+participant "Frontend" as FE
+participant "TaskController" as Controller
+participant "TaskService" as Service
+participant "TaskRepository" as Repo
+database "Database" as DB
+
+User -> FE : Modify task content in edit form
+FE -> Controller : PATCH /tasks/{id} (update data)
+Controller -> Service : updateTask(id, updateData)
+Service -> Repo : findById(id)
+Repo -> DB : SELECT * FROM tasks WHERE id=?
+DB --> Repo : Task
+Repo --> Service : Task
+Service -> Repo : update(task)
+Repo -> DB : UPDATE tasks SET ... WHERE id=?
+DB --> Repo : Update result
+Repo --> Service : Updated task
+Service --> Controller : Updated task
+Controller --> FE : 200 OK (updated task)
+FE --> User : Show success message
+
+@enduml 

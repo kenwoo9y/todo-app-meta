@@ -1,0 +1,24 @@
+@startuml
+!theme plain
+
+title Get All Tasks
+
+actor User
+participant "Frontend" as FE
+participant "TaskController" as Controller
+participant "TaskService" as Service
+participant "TaskRepository" as Repo
+database "Database" as DB
+
+User -> FE : Open task list page
+FE -> Controller : GET /tasks
+Controller -> Service : getAllTasks()
+Service -> Repo : findAll()
+Repo -> DB : SELECT * FROM tasks
+DB --> Repo : Task list
+Repo --> Service : Task list
+Service --> Controller : Task list
+Controller --> FE : 200 OK (task list)
+FE --> User : Display task list
+
+@enduml 

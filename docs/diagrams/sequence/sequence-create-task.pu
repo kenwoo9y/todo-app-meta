@@ -1,0 +1,24 @@
+@startuml
+!theme plain
+
+title Create Task
+
+actor User
+participant "Frontend" as FE
+participant "TaskController" as Controller
+participant "TaskService" as Service
+participant "TaskRepository" as Repo
+database "Database" as DB
+
+User -> FE : Enter task information in form
+FE -> Controller : POST /tasks (task data)
+Controller -> Service : createTask(taskData)
+Service -> Repo : save(task)
+Repo -> DB : INSERT INTO tasks ...
+DB --> Repo : New task ID
+Repo --> Service : New task
+Service --> Controller : New task
+Controller --> FE : 201 Created (new task)
+FE --> User : Show success message
+
+@enduml 

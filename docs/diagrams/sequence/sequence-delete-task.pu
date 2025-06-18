@@ -1,0 +1,24 @@
+@startuml
+!theme plain
+
+title Delete Task
+
+actor User
+participant "Frontend" as FE
+participant "TaskController" as Controller
+participant "TaskService" as Service
+participant "TaskRepository" as Repo
+database "Database" as DB
+
+User -> FE : Click delete task button
+FE -> Controller : DELETE /tasks/{id}
+Controller -> Service : deleteTask(id)
+Service -> Repo : delete(id)
+Repo -> DB : DELETE FROM tasks WHERE id=?
+DB --> Repo : Delete result
+Repo --> Service : Delete completed
+Service --> Controller : Delete completed
+Controller --> FE : 204 No Content
+FE --> User : Show success message
+
+@enduml 

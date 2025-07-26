@@ -19,4 +19,4 @@ A meta repository for learning different technology stacks through a simple Todo
 - todo-infra-aws: Infrastructure built with Terraform on AWS
 - todo-infra-gcp: Infrastructure built with Terraform on Google Cloud
 - todo-infra-azure: Infrastructure built with Terraform on Microsoft Azure
-- todo-infra-heroku: Platform configuration managed with Terraform on Heroku
+- [todo-infra-heroku](https://github.com/kenwoo9y/todo-infra-heroku): Platform configuration managed with Terraform on Heroku

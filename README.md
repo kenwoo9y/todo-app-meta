@@ -16,7 +16,7 @@ A meta repository for learning different technology stacks through a simple Todo
 - [todo-api-go](https://github.com/kenwoo9y/todo-api-go): Backend API built with Go
 
 ### Infrastructure
-- todo-infra-aws: Infrastructure built with Terraform on AWS
+- [todo-infra-aws](https://github.com/kenwoo9y/todo-infra-aws): Infrastructure built with Terraform on AWS
 - [todo-infra-gcp](https://github.com/kenwoo9y/todo-infra-gcp): Infrastructure built with Terraform on Google Cloud
 - [todo-infra-azure](https://github.com/kenwoo9y/todo-infra-azure): Infrastructure built with Terraform on Microsoft Azure
 - [todo-infra-heroku](https://github.com/kenwoo9y/todo-infra-heroku): Platform configuration managed with Terraform on Heroku
